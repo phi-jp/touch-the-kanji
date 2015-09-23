@@ -1,0 +1,29 @@
+{
+  "name": "touch-the-kanji",
+  "version": "2.0.0",
+  "description": "touch-the-kanji",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phi-jp/touch-the-kanji.git"
+  },
+  "author": "phi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phi-jp/touch-the-kanji/issues"
+  },
+  "homepage": "https://github.com/phi-jp/touch-the-kanji",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.3",
+    "gulp-concat": "^2.6.0",
+    "gulp-express": "^0.3.5",
+    "gulp-download": "0.0.1",
+    "gulp-helper": "^1.0.3",
+    "gulp-riot": "^0.2.16",
+    "ip": "^0.3.3"
+  }
+}
