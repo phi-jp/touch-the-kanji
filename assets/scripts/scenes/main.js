@@ -11,6 +11,15 @@ phina.define('MainScene', {
         kanjiGroup: {
           className: 'CanvasElement',
         },
+        answerLabel: {
+          className: 'Label',
+          arguments: {
+            text: '',
+            fontSize: 50,
+          },
+          x: this.gridX.center(),
+          y: this.gridY.span(13),
+        },
       }
     });
 
@@ -22,13 +31,15 @@ phina.define('MainScene', {
       var q = this.questionMap.pickup();
       var kanji = KanjiButton(q).addChildTo(this.kanjiGroup);
       kanji.x = xIndex * 100 + 120;
-      kanji.y = yIndex * 100 + 220;
+      kanji.y = yIndex * 100 + 200;
 
       kanji.onpush = function() {
         this.check(kanji) ? this.correct(kanji) : this.incorrect(kanji);
       }.bind(this);
     }, this);
+  },
 
+  onenter: function() {
     this.setQuestion();
   },
 
@@ -36,19 +47,7 @@ phina.define('MainScene', {
     var target = this.kanjiGroup.children.filter(function(e) {
       return e.active;
     }).pickup();
-
-    if (this.answerLabel) {
-      this.answerLabel.remove();
-    }
-
-    this.answerLabel = Label({
-      text: target.reading,
-      fontSize: 50,
-    }).addChildTo(this);
-
-    this.answerLabel.x = this.gridX.center();
-    this.answerLabel.y = this.gridY.span(13);
-    this.answerLabel.alpha = 1;
+    this.answerLabel.text = target.reading;
 
     this.answerLabel
       .tweener.clear().from({
@@ -56,7 +55,9 @@ phina.define('MainScene', {
         scaleX: 0.5,
         scaleY: 0.5,
         y: this.gridY.span(16),
-      }, 500);
+      }, 500, 'easeOutCubic');
+
+    this.answerLabel.tweener.update(this.app);
   },
 
   check: function(kanji) {
@@ -66,6 +67,7 @@ phina.define('MainScene', {
 
   correct: function(kanji) {
     kanji.disapper();
+
     this.setQuestion();
   },
 
